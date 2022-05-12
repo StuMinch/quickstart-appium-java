@@ -1,6 +1,5 @@
 package tests.RDC;
 
-
 import io.appium.java_client.Setting;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static tests.Config.region;
+
 
 public class AppiumIosRdcAppTest {
 
@@ -42,12 +41,7 @@ public class AppiumIosRdcAppTest {
         System.out.println("Sauce iOS Native - BeforeMethod hook");
         String username = System.getenv("SAUCE_USERNAME");
         String accesskey = System.getenv("SAUCE_ACCESS_KEY");
-        String sauceUrl;
-        if (region.equalsIgnoreCase("eu")) {
-            sauceUrl = "@ondemand.eu-central-1.saucelabs.com:443";
-        } else {
-            sauceUrl = "@ondemand.us-west-1.saucelabs.com:443";
-        }
+        String sauceUrl = "@ondemand.us-west-1.saucelabs.com:443";
         
         String SAUCE_REMOTE_URL = "https://" + username + ":" + accesskey + sauceUrl +"/wd/hub";
         String appName = "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa";
@@ -55,20 +49,16 @@ public class AppiumIosRdcAppTest {
         String methodName = method.getName();
         URL url = new URL(SAUCE_REMOTE_URL);
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "iPhone 8.*");
+        MutableCapabilities capabilities = new MutableCapabilities();
+        capabilities.setCapability("appium:deviceName", "iPhone_11_Pro_14_real_us");
         capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("automationName", "XCuiTest");
-        capabilities.setCapability("app", "storage:filename="+appName); // or "storage:"+appID
+        capabilities.setCapability("automationName", "XCUITest");
+        capabilities.setCapability("appium:platformVersion", "14.3");
         capabilities.setCapability("name", methodName);
-//        capabilities.setCapability("privateDevicesOnly", "true");
-//        capabilities.setCapability("platformVersion", "14.3"); //added
-//        capabilities.setCapability("appiumVersion", ""); //added
-//        capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
-//        capabilities.setCapability("noReset", true);
-//        capabilities.setCapability("cacheId", "1234");
-//        capabilities.setCapability("tags", "sauceDemo1");
-//        capabilities.setCapability("build", "myBuild1");
+        capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+        MutableCapabilities sauceOptions = new MutableCapabilities();
+        sauceOptions.setCapability("appiumVersion", "1.22.3");
+        capabilities.setCapability("sauce:options", sauceOptions);
         try {
             iosDriver.set(new IOSDriver(url, capabilities));
         } catch (Exception e) {
