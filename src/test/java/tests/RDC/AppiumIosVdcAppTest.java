@@ -18,7 +18,7 @@ import java.net.URL;
 
 
 
-public class AppiumIosRdcAppTest {
+public class AppiumIosVdcAppTest {
 
     private static ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<IOSDriver>();
 
@@ -36,20 +36,21 @@ public class AppiumIosRdcAppTest {
         String username = System.getenv("SAUCE_USERNAME");
         String accesskey = System.getenv("SAUCE_ACCESS_KEY");
         String sauceUrl = "@ondemand.us-west-1.saucelabs.com:443";
-        
+
         String SAUCE_REMOTE_URL = "https://" + username + ":" + accesskey + sauceUrl +"/wd/hub";
-        String appName = "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa";
+        String appName = "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.zip";
 //        String appID = "9068cfba-d0cd-4027-99dc-ca70c5bf5278";
         String methodName = method.getName();
         URL url = new URL(SAUCE_REMOTE_URL);
 
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability("appium:deviceName", "iPhone_11_Pro_14_real_us");
+        capabilities.setCapability("appium:deviceName", "iPhone 11 Pro Simulator");
         capabilities.setCapability("platformName", "iOS");
         capabilities.setCapability("automationName", "XCUITest");
         capabilities.setCapability("appium:platformVersion", "14.3");
         capabilities.setCapability("name", methodName);
-        capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+        capabilities.setCapability("app", "storage:filename=iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.zip");
+//        capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.zip");
         MutableCapabilities sauceOptions = new MutableCapabilities();
         sauceOptions.setCapability("appiumVersion", "1.22.3");
         capabilities.setCapability("sauce:options", sauceOptions);
