@@ -46,6 +46,19 @@ The tests will be executed on a iPhone 8.
 
 
 
+## Run Native App tests on Sauce Labs iOS virtual devices in the Sauce Labs Platform
+If you want to run the Native iOS App tests on Sauce Labs virtual devices then you can run the iOS tests with
+
+    // If using the US DC
+    mvn clean install -DtestngXmlFile=appium_ios_vdc_app_test.xml -Dregion=us
+    
+    // If using the EU DC
+    mvn clean install -DtestngXmlFile=appium_ios_vdc_app_test.xml -Dregion=eu
+    
+The tests will be executed on an iPhone 11 Pro Simulator.
+
+
+
 ## Run Web App tests on Sauce Labs Android Emulators
 If you want to run the Web App tests on Sauce Labs real Android devices then you can run the web tests with
 
