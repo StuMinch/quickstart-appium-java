@@ -1,11 +1,12 @@
 package tests.RDC;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.Setting;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -102,17 +103,20 @@ public class AppiumIosRdcAppTest {
         IOSDriver driver = getiosDriver();
 
 //        WebElement usernameEdit = (WebElement) driver.findElementByAccessibilityId(usernameID);
-        List<IOSElement> usernameEdit = (List<IOSElement>) driver.findElementsByAccessibilityId(usernameID);
+//        List<WebElement> usernameEdit = driver.findElements(AppiumBy.accessibilityId(usernameID));
+        WebElement usernameEdit = (WebElement) driver.findElement(AppiumBy.accessibilityId(usernameID));
 
-        usernameEdit.get(0).click();
-        usernameEdit.get(0).sendKeys(user);
+//        usernameEdit.get(0).click();
+//        usernameEdit.get(0).sendKeys(user);
+        usernameEdit.click();
+        usernameEdit.sendKeys(user);
 
 
-        WebElement passwordEdit = (WebElement) driver.findElementByAccessibilityId(passwordID);
+        WebElement passwordEdit = (WebElement) driver.findElement(AppiumBy.accessibilityId(passwordID));
         passwordEdit.click();
         passwordEdit.sendKeys(pass);
 
-        WebElement submitButton = (WebElement) driver.findElementByAccessibilityId(submitButtonID);
+        WebElement submitButton = (WebElement) driver.findElement(AppiumBy.accessibilityId(submitButtonID));
         submitButton.click();
     }
 
